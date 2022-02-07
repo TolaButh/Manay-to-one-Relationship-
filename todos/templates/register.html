@@ -1,0 +1,88 @@
+{% extends 'layout.html' %}
+{% block title %}
+{{title}}
+{% endblock  %}
+{% block content %}
+<div class="container">
+    <h1 class="text-center text-primary">
+        {{title}}
+    </h1>
+    <hr>
+
+    <form action="" method="post" novalidate>
+        {{form.hidden_tag()}} 
+        <div class="mb-3 mt-3">
+            {{form.username.label(class="mb-3")}}
+            {% if form.username.errors %}
+                {{form.username(class="form-control is-invalid")}}
+                <div class="invalid-feedback">
+                    {% for error in form.username.errors %}
+                        <span>{{error}}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+            {{form.username(class="form-control")}}
+            {% endif %}
+           
+        </div>
+
+        <div class="mb-3 mt-3">
+            {{form.email.label(class="mb-3")}}
+            {% if form.email.errors %}
+            {{form.email(class="form-control is-invalid")}}
+            <div class="invalid-feedback">
+                {% for error in form.email.errors %}
+                    <span>{{error}}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{form.email(class="form-control")}}
+
+            {% endif %}
+           
+        </div>
+        <div class="mb-3 mt-3">
+            {{form.password.label(class="mb-3")}}
+            {% if form.password.errors %}
+            {{form.password(class="form-control is-invalid")}}
+            <div class="invalid-feedback">
+                {% for error in form.password.errors %}
+                <span>{{error}}</span>
+                {% endfor %}
+            </div>  
+            {% else %}
+            {{form.password(class="form-control")}}
+            {% endif %}
+           
+        </div>
+
+        <div class="mb-3 mt-3">
+            {{form.confirm_password.label(class="mb-3")}}
+            {% if form.confirm_password.errors %}
+                {{form.confirm_password(class="form-control is-invalid")}}
+                {% for error in form.confirm_password.errors %}
+                <div class="invalid-feedback">
+                    <span>{{error}}</span>
+                </div>
+                {% endfor %}
+            {% else %}
+            {{form.confirm_password(class="form-control")}}
+
+            {% endif %}
+           
+        </div>
+
+        <div class="mb-3 mt-3">
+            {{form.submit(class="btn btn-outline-primary")}}
+        </div>
+    </form>
+    <div class="border-top pt-4">
+        <small class="text-muted">
+            Already Have an Account? <a href="{{url_for("login")}}" class="text-decoration-none">Sign In</a>
+        </small>
+    </div>
+
+
+
+</div>
+{% endblock  %}

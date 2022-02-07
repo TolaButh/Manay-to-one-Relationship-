@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Todo - {% block title %}{% endblock  %}</title>
+        <meta name="description" content="">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;1,400&display=swap" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{url_for('static', filename="css/bootstrap.min.css")}}">
+        <link rel="stylesheet" href="{{url_for('static', filename="css/styles.css")}}">
+
+    </head>
+    <body>
+        {% include 'navbar.html' %}
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+             <ul class=flashes>
+                {% for category, message in messages %}
+                 <div class="alert alert-{{category}} alert-dismissible fade show">{{message}}
+
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                 </div>
+                
+        {% endfor %}
+            </ul>
+         {% endif %}
+        {% endwith %}
+
+
+       {% block content %}{% endblock  %}
+
+       <script src="{{url_for("static", filename="js/bootstrap.bundle.min.js")}}"></script>
+    </body>
+</html>

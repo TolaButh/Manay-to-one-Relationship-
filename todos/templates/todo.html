@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+{% block title %}{{title}}{% endblock  %}
+{% block content %}
+<div class="container">
+
+    <h1 class="text-center">
+        {{title}}
+    </h1>
+    <hr>
+    <div class="row">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          {% if todo %}
+          <a href="{{url_for('new_todo')}}" class="btn btn-outline-success me-md-2 disabled">New Todo</a>
+          {% else %}
+          <a href="{{url_for('new_todo')}}" class="btn btn-outline-success me-md-2">New Todo</a>
+          {% endif %}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <form action="" method="post">
+            {{form.hidden_tag()}}
+            <div class="input-group mb-3 mt-3">
+                {{form.task(class="form-control")}}
+               {% if todo %}
+               {{form.submit(class="btn btn-outline-success")}}
+               {% else %}
+               {{form.submit(class="btn btn-outline-success", disabled=True)}}
+               {% endif %}
+
+            </div>
+        </form>
+    </div>
+
+    <hr>
+    <div class="mt-5">
+        <Table class="table">
+            <tbody>
+                {% if tasks %}
+                {% for task in tasks %}
+                <tr>
+                    <td>{{task.task}}</td>
+                    <td>
+                        {% if task.completed %}
+                        <a href="" class="btn btn-outline-success btn-sm disabled">Task complete</a>
+                        {% else %}
+                        <a href="{{url_for('task_completed', id=task.id)}}" class="btn btn-outline-dark btn-sm">Task Uncomplete</a>
+                        {% endif %}
+                    </td>
+                    </tr>
+                {% endfor %}
+                {% endif %}
+               
+            </tbody>
+        </Table>
+    </div>
+    
+</div>
+
+{% endblock  %}
