@@ -79,6 +79,7 @@ def account():
 def todo():
     form = TaskForm()
     todo = Todo.query.filter(Todo.date_created == date.today(), Todo.user_id==current_user.id).first()
+    
     if todo:
         tasks = Task.query.filter(Task.todo_id==todo.id)
     else:
